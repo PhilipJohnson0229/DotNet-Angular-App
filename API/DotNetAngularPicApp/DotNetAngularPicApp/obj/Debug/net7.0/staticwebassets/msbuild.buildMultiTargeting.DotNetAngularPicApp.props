@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\DotNetAngularPicApp.props" />
+</Project>

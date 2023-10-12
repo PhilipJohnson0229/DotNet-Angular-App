@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "JEmiHWVTRmhgLCmHCYtNHssek+5MYAcXIw6wkfvsomQ=",
+  "Source": "DotNetAngularPicApp",
+  "BasePath": "_content/DotNetAngularPicApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
