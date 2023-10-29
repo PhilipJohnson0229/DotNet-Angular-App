@@ -8,6 +8,7 @@ namespace DotNetAngularPicApp.Repositories.Implementation
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext dbContext;
+
         //the command ctor then tab will create a constructor for you
         //create a constructor so we can leverage dependency injecton to wire in the services
         //that we need
@@ -25,6 +26,38 @@ namespace DotNetAngularPicApp.Repositories.Implementation
             await dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await dbContext.Categories.ToListAsync();
+        }
+
+        //REMINDER the question mark is syntax for an object that can return in place of null values
+        //just like the Optional type in java
+        public async Task<Category?> GetById(Guid id)
+        {
+            //pay attention to this pattern its similiar to how we can handle collections with
+            //streams in java
+            return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<Category?> UpdateAsync(Category category)
+        {
+            var existingCatgory = await dbContext.Categories
+                .FirstOrDefaultAsync(x => x.Id == category.Id);
+
+            if(existingCatgory != null)
+            {
+                dbContext.Entry(existingCatgory).CurrentValues.SetValues(category);
+
+                //remember that we need this line if we plan to make changes in the db
+                await dbContext.SaveChangesAsync();
+
+                return category;
+            }
+
+            return null;
         }
     }
 }

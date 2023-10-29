@@ -7,4 +7,49 @@
         <!-- anchor -->
         <a [routerLink] = "['/admin/categories/add']" class = "btn btn-primary">Add Category</a>
     </div>
+
+    <!-- with *ngIf we will only render this grid IF categories is constructed -->
+    <!-- the $ suffix means Observable -->
+    <!-- here we use | aync and we return the value as categories list -->
+    <ng-container *ngIf="categories$ | async as categories">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Url Handle
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- here we will loop through the categories with *ngFor -->
+                <!-- and display them in this grid this will create a row on our grid -->
+                <!-- categories is referenced up above with *ngIf -->
+                <tr *ngFor = "let category of categories">
+                    <td>
+                        {{category.id}}
+                    </td>
+                    <td>
+                        {{category.name}}
+                    </td>
+                    <td>
+                        {{category.urlHandle}}
+                    </td>
+                    <td>
+                        <!-- this is how we pass the query param to the url -->
+                        <a 
+                            class="btn btn-light" 
+                            [routerLink]="['/admin/categories', category.id]">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>
