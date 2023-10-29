@@ -59,5 +59,22 @@ namespace DotNetAngularPicApp.Repositories.Implementation
 
             return null;
         }
+
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if(existingCategory is null)
+            {
+                return null;
+            }
+
+            dbContext.Categories.Remove(existingCategory);
+
+            //again dont forget this line so we can update the db
+            await dbContext.SaveChangesAsync();
+
+            return existingCategory;
+        }
     }
 }

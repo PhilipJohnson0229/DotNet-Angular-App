@@ -60,7 +60,9 @@ export class EditCategoryComponent implements OnInit, OnDestroy{
         }
       });
     }
+  }
 
+  onDelete():void{
 
   }
 }

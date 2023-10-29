@@ -11,6 +11,7 @@ namespace DotNetAngularPicApp.Controllers
     //this route translates to https://localhost:7092/api/Categories
     [Route("api/[controller]")]
     [ApiController]
+
     //all controllers will inherit from the ControllerBase class
     public class CategoriesController : ControllerBase
     {
@@ -136,6 +137,30 @@ namespace DotNetAngularPicApp.Controllers
                 Id = category.Id,
                 Name = category.Name,
                 UrlHandle = category.UrlHandle
+            };
+
+            return Ok(response);
+        }
+
+        //Generally its better not to use DELETE but for the purpose of this demo it will be used
+        //its better practice to set another field to act as a flag to disable or enable the record
+        //that flag can be used to filter out disabled and active records
+        //DELETE https://localhost:7092/api/Categories/{Id}
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+        {
+            var category = await categoryRepository.DeleteAsync(id);
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            var response = new CategoryDto {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle    
             };
 
             return Ok(response);
