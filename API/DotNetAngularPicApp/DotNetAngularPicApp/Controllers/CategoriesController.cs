@@ -70,7 +70,8 @@ namespace DotNetAngularPicApp.Controllers
             foreach (var category in categories)
             {
                 // loop through all of the categories in the db and add to the response object
-                response.Add(new CategoryDto {
+                response.Add(new CategoryDto
+                {
                     Id = category.Id,
                     Name = category.Name,
                     UrlHandle = category.UrlHandle
@@ -85,21 +86,23 @@ namespace DotNetAngularPicApp.Controllers
         [HttpGet]
         //this i show we add query params to the url
         [Route("{id:Guid}")]
-        //from route grabs the query param from the url
+        //[FromRoute] grabs the query param from the url
         //I found that if we dont name the query param variable exactly as how it should be in the
         //route then .net core will get confused and require 2 query params making the method unusable
-        public async Task<IActionResult> GetCategoryById([FromRoute] Guid id) { 
+        public async Task<IActionResult> GetCategoryById([FromRoute] Guid id)
+        {
             var existingCategory = await categoryRepository.GetById(id);
 
             //instead of the double equals operator we can use keywords like is
-            if(existingCategory is null)
+            if (existingCategory is null)
             {
                 return NotFound();
             }
 
-            var response = new CategoryDto { 
+            var response = new CategoryDto
+            {
                 Id = existingCategory.Id,
-                Name= existingCategory.Name,
+                Name = existingCategory.Name,
             };
 
             return Ok(response);
@@ -109,7 +112,7 @@ namespace DotNetAngularPicApp.Controllers
         //PUT https://localhost:7092/api/Categories/{Id}
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> EditCategory([FromRoute] Guid id, 
+        public async Task<IActionResult> EditCategory([FromRoute] Guid id,
             UpdateCategoryRequestDto request)
         {
             //Map dto to the domain model
