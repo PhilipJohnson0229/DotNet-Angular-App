@@ -63,6 +63,13 @@ export class EditCategoryComponent implements OnInit, OnDestroy{
   }
 
   onDelete():void{
-
+    //this is shorthand for this.id IS defined
+    if(this.id){
+      this.categoryService.deleteCategory(this.id).subscribe({
+        next: (response) =>{
+          this.router.navigateByUrl('/admin/categories');
+        }
+      });
+    }
   }
 }
