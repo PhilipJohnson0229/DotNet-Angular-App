@@ -20,7 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 //here we are creating a bean/service for the database layer
+//the Repository implementation class is similar to that of a @service stereotype in spring
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 var app = builder.Build();
 

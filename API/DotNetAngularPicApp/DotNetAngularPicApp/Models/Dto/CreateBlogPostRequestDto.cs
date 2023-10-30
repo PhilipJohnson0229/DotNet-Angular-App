@@ -1,19 +1,11 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
-
-namespace DotNetAngularPicApp.Models.Domain
+﻿namespace DotNetAngularPicApp.Models.Dto
 {
-    public class BlogPost
+    public class CreateBlogPostRequestDto
     {
-        public Guid Id
-        { 
-            get; 
-            set; 
-        }
-
-        public String Title 
-        { 
-            get; 
-            set; 
+        public String Title
+        {
+            get;
+            set;
         }
 
         public String ShortDescription
