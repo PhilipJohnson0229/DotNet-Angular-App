@@ -8,7 +8,10 @@ import { CategoryListComponent } from './features/category/category-list/categor
 import { AddCategoryComponent } from './features/category/add-category/add-category.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { EditCategoryComponent } from './features/category/edit-category/edit-category.component'
+import { EditCategoryComponent } from './features/category/edit-category/edit-category.component';
+import { BlogpostListComponent } from './features/blog-posts/blogpost-list/blogpost-list.component';
+import { AddBlogpostComponent } from './features/blog-posts/add-blogpost/add-blogpost.component';
+
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
     NavbarComponent,
     CategoryListComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    BlogpostListComponent,
+    AddBlogpostComponent
   ],
   imports: [
     BrowserModule,
