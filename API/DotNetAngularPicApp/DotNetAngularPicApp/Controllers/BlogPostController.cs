@@ -1,4 +1,5 @@
-﻿using DotNetAngularPicApp.Models.Domain;
+﻿using Azure.Core;
+using DotNetAngularPicApp.Models.Domain;
 using DotNetAngularPicApp.Models.Dto;
 using DotNetAngularPicApp.Repositories.Implementation;
 using DotNetAngularPicApp.Repositories.Interface;
@@ -47,14 +48,44 @@ namespace DotNetAngularPicApp.Controllers
                 PublishedDate = blogPost.PublishedDate,
                 FeaturedImageUrl = blogPost.FeaturedImageUrl,
                 ShortDescription = blogPost.ShortDescription,
-                Author = request.Author,
-                IsVisible = request.IsVisible,
-                UrlHandle = request.UrlHandle,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                UrlHandle = blogPost.UrlHandle,
             };
 
             return Ok(response);
         }
 
+        //GET https://localhost:7092/api/Categories
+        [HttpGet]
+        public async Task<IActionResult> GetAllBlogPosts()
+        {
+            //never expose class model just expose DTOs
+            var blogPosts = await blogPostRepository.GetAllAsync();
+
+            var response = new List<BlogPostDto>();
+
+            //Map domain model to DTO
+            foreach (var blogPost in blogPosts)
+            {
+                // loop through all of the categories in the db and add to the response object
+                response.Add(new BlogPostDto
+                {
+                    Id = blogPost.Id,
+                    Title = blogPost.Title,
+                    Content = blogPost.Content,
+                    PublishedDate = blogPost.PublishedDate,
+                    FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                    ShortDescription = blogPost.ShortDescription,
+                    Author = blogPost.Author,
+                    IsVisible = blogPost.IsVisible,
+                    UrlHandle = blogPost.UrlHandle,
+                });
+            }
+            
+
+            return Ok(response);
+        }
 
     }
 }

@@ -8,4 +8,48 @@
             Add BlogPost
         </a>
     </div>
+
+    <!-- with *ngIf we will only render this grid IF categories is constructed -->
+    <!-- the $ suffix means Observable -->
+    <!-- here we use | aync and we return the value as categories list -->
+    <ng-container *ngIf="blogPost$ | async as blogPosts">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Short Description
+                    </th>
+                    <th>
+                        Is Visible?
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- here we will loop through the categories with *ngFor -->
+                <!-- and display them in this grid this will create a row on our grid -->
+                <!-- categories is referenced up above with *ngIf -->
+                <tr *ngFor = "let blogPost of blogPosts">
+                    <td>
+                        {{blogPost.title}}
+                    </td>
+                    <td>
+                        {{blogPost.shortDescription}}
+                    </td>
+                    <td>
+                        {{blogPost.isVisible}}
+                    </td>
+                    <td>
+                        <!-- this is how we pass the query param to the url -->
+                        <a 
+                            class="btn btn-light">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
 </div>
