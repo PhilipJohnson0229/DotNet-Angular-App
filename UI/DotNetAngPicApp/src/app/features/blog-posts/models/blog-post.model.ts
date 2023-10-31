@@ -1,11 +1,11 @@
 export interface BlogPost{
-    id:String,
-    title:String,
-    shortDescription:String,
-    content:String,
-    featuredImageUrl:String,
-    urlHandle:String,
-    author:String,
+    id:string,
+    title:string,
+    shortDescription:string,
+    content:string,
+    featuredImageUrl:string,
+    urlHandle:string,
+    author:string,
     publishedDate:Date,
     isVisible:boolean
 }
