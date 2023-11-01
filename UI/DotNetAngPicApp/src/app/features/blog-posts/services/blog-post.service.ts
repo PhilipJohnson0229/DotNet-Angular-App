@@ -18,6 +18,7 @@ export class BlogPostService {
 
    //this method will not need any parameters because were just returning a list with a GET method
    getAllBlogPosts() : Observable<BlogPost[]>{
+    
     //when we use back ticks on the string we allow for the injection of variables
     //in this line were using the environment file we generated to provide the base url prefix
     return this.http.get<BlogPost[]>(`${environment.baseUrl}/api/BlogPost`);

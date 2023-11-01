@@ -103,6 +103,15 @@ namespace DotNetAngularPicApp.Controllers
                     Author = blogPost.Author,
                     IsVisible = blogPost.IsVisible,
                     UrlHandle = blogPost.UrlHandle,
+                    //we use Select to convert from domain model to Dto
+                    //again this is much like using stream in java
+                    Categories = blogPost.Categories.Select(x => new CategoryDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle,
+
+                    }).ToList(),
                 });
             }
             

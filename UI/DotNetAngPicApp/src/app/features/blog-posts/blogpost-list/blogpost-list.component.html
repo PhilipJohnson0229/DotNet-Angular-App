@@ -25,6 +25,9 @@
                     <th>
                         Is Visible?
                     </th>
+                    <th>
+                        Categories
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +43,12 @@
                     </td>
                     <td>
                         {{blogPost.isVisible}}
+                    </td>
+                    <td>
+                        <!-- here we loop through the categories related to this blog post -->
+                        <span *ngFor="let category of blogPost.categories">
+                            <span class="badge bg-primary me-2">{{category.name}}</span>
+                        </span>
                     </td>
                     <td>
                         <!-- this is how we pass the query param to the url -->

@@ -23,7 +23,9 @@ namespace DotNetAngularPicApp.Repositories.Implementation
 
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
-            return await dbContext.BlogPosts.ToListAsync();
+            //with this line we include the categories related to the blogposts
+            //.Include()
+            return await dbContext.BlogPosts.Include(x => x.Categories).ToListAsync();
         }
     }
 }
