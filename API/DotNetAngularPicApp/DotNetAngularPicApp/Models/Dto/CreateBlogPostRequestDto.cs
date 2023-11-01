@@ -49,5 +49,7 @@
             get;
             set;
         }
+
+        public Guid[] Categories { get; set; }
     }
 }
