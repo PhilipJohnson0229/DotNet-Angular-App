@@ -17,6 +17,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy{
   editCategorySubscription?: Subscription;
   category?: Category;
 
+
   constructor(private route: ActivatedRoute, 
     private categoryService:CategoryService, private router: Router){
     

@@ -114,7 +114,44 @@ namespace DotNetAngularPicApp.Controllers
                     }).ToList(),
                 });
             }
-            
+
+            return Ok(response);
+        }
+
+        //GET https://localhost:7092/api/Categories
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetBlogPostById([FromRoute] Guid id)
+        {
+            //Get the blogpost from the repository
+            var blogPost = await blogPostRepository.GetById(id);
+           
+            if(blogPost == null)
+            {
+                return NotFound();
+            }
+
+            var response = new BlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                Content = blogPost.Content,
+                PublishedDate = blogPost.PublishedDate,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                ShortDescription = blogPost.ShortDescription,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                UrlHandle = blogPost.UrlHandle,
+                //we use Select to convert from domain model to Dto
+                //again this is much like using stream in java
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+
+                }).ToList()
+            };
 
             return Ok(response);
         }

@@ -9,5 +9,7 @@ namespace DotNetAngularPicApp.Repositories.Interface
 
         Task<IEnumerable<BlogPost>> GetAllAsync();
 
+        //the question mark is much like the optional type in java in that it can return as null
+        Task<BlogPost?> GetById(Guid id);
     }
 }

@@ -5,6 +5,7 @@ import { AddCategoryComponent } from './features/category/add-category/add-categ
 import { EditCategoryComponent } from './features/category/edit-category/edit-category.component';
 import { BlogpostListComponent } from './features/blog-posts/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './features/blog-posts/add-blogpost/add-blogpost.component';
+import { EditBlogpostComponent } from './features/blog-posts/edit-blogpost/edit-blogpost.component';
 
 const routes: Routes = [
   // this is an object inside of an array....duh
@@ -35,6 +36,12 @@ const routes: Routes = [
     path:'admin/blogposts/add',
     //render the component we made
     component:AddBlogpostComponent
+  },
+  {
+    //the colon notates that this route requires the id query param
+    path:'admin/blogposts/:id',
+    //render the component we made
+    component:EditBlogpostComponent
   }
 ];
 

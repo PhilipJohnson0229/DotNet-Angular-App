@@ -25,7 +25,16 @@ namespace DotNetAngularPicApp.Repositories.Implementation
         {
             //with this line we include the categories related to the blogposts
             //.Include()
-            return await dbContext.BlogPosts.Include(x => x.Categories).ToListAsync();
+            return await dbContext.BlogPosts.Include(b => b.Categories).ToListAsync();
+        }
+
+        //REMINDER the question mark is syntax for an object that can return in place of null values
+        //just like the Optional type in java
+        public async Task<BlogPost?> GetById(Guid id)
+        {
+            //pay attention to this pattern its similiar to how we can handle collections with
+            //streams in java
+            return await dbContext.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == id);
         }
     }
 }

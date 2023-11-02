@@ -23,4 +23,11 @@ export class BlogPostService {
     //in this line were using the environment file we generated to provide the base url prefix
     return this.http.get<BlogPost[]>(`${environment.baseUrl}/api/BlogPost`);
   }
+
+  //this method takes in the id parameter
+  getBlogPostById(id:string) : Observable<BlogPost>{
+    
+    //within the brackets we pass in the param as such
+    return this.http.get<BlogPost>(`${environment.baseUrl}/api/BlogPost/${id}`);
+  }
 }

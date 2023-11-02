@@ -28,6 +28,9 @@
                     <th>
                         Categories
                     </th>
+                    <th>
+                        
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -52,8 +55,7 @@
                     </td>
                     <td>
                         <!-- this is how we pass the query param to the url -->
-                        <a 
-                            class="btn btn-light">
+                        <a class="btn btn-light" [routerLink]="['/admin/blogposts', blogPost.id]">
                             Edit
                         </a>
                     </td>
