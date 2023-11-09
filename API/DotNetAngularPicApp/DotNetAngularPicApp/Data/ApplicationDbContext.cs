@@ -10,7 +10,9 @@ namespace DotNetAngularPicApp.Data
         {
         }
 
+        //These are required in order for the entity manager to create the tables in the db
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<BlogImage> BlogImages { get; set; }
         public DbSet<Category> Categories { get; set; }
     }
 }

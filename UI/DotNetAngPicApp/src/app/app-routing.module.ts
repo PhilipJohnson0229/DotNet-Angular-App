@@ -6,9 +6,15 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { BlogpostListComponent } from './features/blog-posts/blogpost-list/blogpost-list.component';
 import { AddBlogpostComponent } from './features/blog-posts/add-blogpost/add-blogpost.component';
 import { EditBlogpostComponent } from './features/blog-posts/edit-blogpost/edit-blogpost.component';
+import { HomeComponent } from './features/public/home/home.component';
 
 const routes: Routes = [
   // this is an object inside of an array....duh
+  {
+    path:'',
+    //render the component we made
+    component:HomeComponent
+  },
   {
     path:'admin/categories',
     //render the component we made

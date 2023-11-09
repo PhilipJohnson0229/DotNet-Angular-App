@@ -30,11 +30,47 @@ namespace DotNetAngularPicApp.Repositories.Implementation
 
         //REMINDER the question mark is syntax for an object that can return in place of null values
         //just like the Optional type in java
-        public async Task<BlogPost?> GetById(Guid id)
+        public async Task<BlogPost?> GetByIdAsync(Guid id)
         {
             //pay attention to this pattern its similiar to how we can handle collections with
             //streams in java
-            return await dbContext.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == id);
+            return await dbContext.BlogPosts.Include(b => b.Categories).FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<BlogPost?> UpdateByIdAsync(BlogPost blogPost)
+        {
+            var existingBlogPost = await dbContext.BlogPosts.Include(x => x.Categories)
+               .FirstOrDefaultAsync(x => x.Id == blogPost.Id);
+
+            if (existingBlogPost == null)
+            {
+                return null;
+            }
+
+            // Update BlogPost
+            dbContext.Entry(existingBlogPost).CurrentValues.SetValues(blogPost);
+
+            // Update Categories
+            existingBlogPost.Categories = blogPost.Categories;
+
+            await dbContext.SaveChangesAsync();
+
+            return blogPost;
+        }
+
+        public async Task<BlogPost?> DeleteAsync(Guid id)
+        {
+            var existingBlogPost = await dbContext.BlogPosts.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingBlogPost != null)
+            {
+                dbContext.BlogPosts.Remove(existingBlogPost);
+                await dbContext.SaveChangesAsync();
+                return existingBlogPost;
+            }
+
+            return null;
+        }
+
     }
 }
