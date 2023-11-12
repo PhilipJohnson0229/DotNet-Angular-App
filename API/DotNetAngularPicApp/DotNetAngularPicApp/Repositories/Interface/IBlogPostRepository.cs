@@ -11,9 +11,10 @@ namespace DotNetAngularPicApp.Repositories.Interface
         //the question mark is much like the optional type in java in that it can return as null
         Task<BlogPost?> GetByIdAsync(Guid id);
 
-        //
         Task<BlogPost?> UpdateByIdAsync(BlogPost blogPost);
 
         Task<BlogPost?> DeleteAsync(Guid id);
+
+        Task<BlogPost?> GetByUrlHandleAsync(string urlHandle);
     }
 }

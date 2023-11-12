@@ -7,6 +7,7 @@ import { BlogpostListComponent } from './features/blog-posts/blogpost-list/blogp
 import { AddBlogpostComponent } from './features/blog-posts/add-blogpost/add-blogpost.component';
 import { EditBlogpostComponent } from './features/blog-posts/edit-blogpost/edit-blogpost.component';
 import { HomeComponent } from './features/public/home/home.component';
+import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
 
 const routes: Routes = [
   // this is an object inside of an array....duh
@@ -14,6 +15,12 @@ const routes: Routes = [
     path:'',
     //render the component we made
     component:HomeComponent
+  },
+  // this is an object inside of an array....duh
+  {
+    path:'blog/:url',
+    //render the component we made
+    component:BlogDetailsComponent
   },
   {
     path:'admin/categories',

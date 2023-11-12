@@ -2,6 +2,7 @@
 using DotNetAngularPicApp.Models.Domain;
 using DotNetAngularPicApp.Models.Dto;
 using DotNetAngularPicApp.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -32,6 +33,7 @@ namespace DotNetAngularPicApp.Controllers
         //Task is much like a ResponseEntity type in java spring boot
         //POST https://localhost:7092/api/Categories
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequestDto request)
         {
             //convert input param Dto into a domain model so we can communicate with the db
@@ -148,6 +150,8 @@ namespace DotNetAngularPicApp.Controllers
         //DELETE https://localhost:7092/api/Categories/{Id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        //we will require a JWT token to access this resource
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
         {
             var category = await categoryRepository.DeleteAsync(id);

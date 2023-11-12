@@ -6,7 +6,8 @@ namespace DotNetAngularPicApp.Data
     public class ApplicationDbContext : DbContext
     {
         //this construtor will be called in child classes
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        //because we have multiple DbContext's we have to specify within the DbContextOtions
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
