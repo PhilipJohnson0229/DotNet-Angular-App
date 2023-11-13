@@ -115,6 +115,7 @@ namespace DotNetAngularPicApp.Controllers
         //PUT https://localhost:7092/api/Categories/{Id}
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditCategory([FromRoute] Guid id,
             UpdateCategoryRequestDto request)
         {

@@ -1,6 +1,6 @@
 <ng-container *ngIf="blogPost$ | async as blogPost;else loader">
     <div class="container">
-      <div class="py-5">
+      <div class="py-5" style="background-color: white;">
         <div class="col-12 col-md-8 col-lg-6 mx-auto">
           <img [src]="blogPost.featuredImageUrl" [title]="blogPost.title"
           class="img-fluid">

@@ -5,13 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '../models/category.model';
 import { environment } from 'src/environments/environment.development';
 import { UpdateCategoryRequest } from '../models/update-category-request.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,
+    private cookieService: CookieService) { 
   }
 
   //the Observable type is a promise we have to subscribe to that will listen for the data to 
@@ -21,7 +23,7 @@ export class CategoryService {
 
     //with our http object we place the url to get our data from
     //after providing the url string we provide the body we will send back with the post request
-    return this.http.post<void>(`${environment.baseUrl}/api/Categories`, model);
+    return this.http.post<void>(`${environment.baseUrl}/api/Categories?addAuth=true`, model);
   }
 
   //this method will not need any parameters because were just returning a list with a GET method
@@ -38,11 +40,11 @@ export class CategoryService {
 
   //here we pass in the id as well as the UpdateCategoryRequest object we defined
   updateCategory(id:String, updateCategoryRequest: UpdateCategoryRequest) : Observable<Category>{
-    return this.http.put<Category>(`${environment.baseUrl}/api/Categories/${id}`, 
+    return this.http.put<Category>(`${environment.baseUrl}/api/Categories/${id}?addAuth=true`, 
     updateCategoryRequest);
   }
 
   deleteCategory(id:String):Observable<Category>{
-    return this.http.delete<Category>(`${environment.baseUrl}/api/Categories/${id}`);
+    return this.http.delete<Category>(`${environment.baseUrl}/api/Categories/${id}?addAuth=true`);
   }
 }

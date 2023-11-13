@@ -14,7 +14,7 @@ export class BlogPostService {
   constructor(private http: HttpClient) { }
 
   createBlogPost(data:AddBlogPost): Observable<BlogPost>{
-    return this.http.post<BlogPost>(`${environment.baseUrl}/api/blogpost`, data);
+    return this.http.post<BlogPost>(`${environment.baseUrl}/api/blogpost?addAuth=true`, data);
   }
 
    //this method will not need any parameters because were just returning a list with a GET method
@@ -37,10 +37,10 @@ export class BlogPostService {
   }
 
   updateBlogPost(id: string, updatedBlogPost: UpdateBlogPost): Observable<BlogPost> {
-    return this.http.put<BlogPost>(`${environment.baseUrl}/api/BlogPost/${id}`, updatedBlogPost);
+    return this.http.put<BlogPost>(`${environment.baseUrl}/api/BlogPost/${id}?addAuth=true`, updatedBlogPost);
   }
 
   deleteBlogPost(id: string): Observable<BlogPost> {
-    return this.http.delete<BlogPost>(`${environment.baseUrl}/api/BlogPost/${id}`);
+    return this.http.delete<BlogPost>(`${environment.baseUrl}/api/BlogPost/${id}?addAuth=true`);
   }
 }

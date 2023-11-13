@@ -8,6 +8,8 @@ import { AddBlogpostComponent } from './features/blog-posts/add-blogpost/add-blo
 import { EditBlogpostComponent } from './features/blog-posts/edit-blogpost/edit-blogpost.component';
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { authGuard } from './features/auth/guards/auth.guard';
 
 const routes: Routes = [
   // this is an object inside of an array....duh
@@ -15,6 +17,11 @@ const routes: Routes = [
     path:'',
     //render the component we made
     component:HomeComponent
+  },
+  {
+    path:'login',
+    //render the component we made
+    component:LoginComponent
   },
   // this is an object inside of an array....duh
   {
@@ -25,36 +32,42 @@ const routes: Routes = [
   {
     path:'admin/categories',
     //render the component we made
-    component:CategoryListComponent
+    component:CategoryListComponent,
+    canActivate:[authGuard]
   },
   {
     path:'admin/categories/add',
     //render the component we made
-    component:AddCategoryComponent
+    component:AddCategoryComponent,
+    canActivate:[authGuard]
   },
   {
     //the colon notates that this route requires the id query param
     path:'admin/categories/:id',
     //render the component we made
-    component:EditCategoryComponent
+    component:EditCategoryComponent,
+    canActivate:[authGuard]
   },
   {
     //the colon notates that this route requires the id query param
     path:'admin/blogposts',
     //render the component we made
-    component:BlogpostListComponent
+    component:BlogpostListComponent,
+    canActivate:[authGuard]
   },
   {
     //the colon notates that this route requires the id query param
     path:'admin/blogposts/add',
     //render the component we made
-    component:AddBlogpostComponent
+    component:AddBlogpostComponent,
+    canActivate:[authGuard]
   },
   {
     //the colon notates that this route requires the id query param
     path:'admin/blogposts/:id',
     //render the component we made
-    component:EditBlogpostComponent
+    component:EditBlogpostComponent,
+    canActivate:[authGuard]
   }
 ];
 
